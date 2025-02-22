@@ -1,44 +1,207 @@
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #3F4254;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #9D2F50;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-links a:hover {
+  color: #FFD700;
+  transform: scale(1.1);
+}
+
+.add-event-btn {
+  background: #FFD700;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.add-event-btn:hover {
+  background: #FFC300;
+}
+
+/* Main Layout */
 .calendar-wrapper {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  padding: 20px;
 }
 
+.content-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Calendar */
 .calendar-container {
   flex: 2;
-  background: white;
+  background: #252734;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
+/* Event Details Sidebar */
 .event-sidebar {
   flex: 1;
-  background: #ffffff;
+  background: #1E1F2A;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  height: fit-content;
+  transition: all 0.3s ease-in-out;
 }
 
-.placeholder-text {
+.event-sidebar.hidden {
+  transform: translateX(120%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.event-sidebar.show {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.event-details {
   text-align: center;
-  color: #888;
 }
 
 .event-details h2 {
-  color: #1976d2;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #FFD700;
 }
 
-.volunteer-btn {
-  background: #1976d2;
-  color: white;
-  padding: 8px 12px;
+.event-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Add Event Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: rgba(30, 31, 42, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
   border: none;
-  border-radius: 5px;
+  font-size: 20px;
+  color: white;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.volunteer-btn:hover {
-  background: #0d47a1;
+/* Event Form */
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-form input,
+.event-form select,
+.event-form textarea,
+.event-form button {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  width: 100%;
+}
+
+.event-form input,
+.event-form select,
+.event-form textarea {
+  background: #1E1F2A;
+  color: white;
+}
+
+.event-form input::placeholder,
+.event-form textarea::placeholder {
+  color: #bbb;
+}
+
+.event-form button {
+  background: #FFD700;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.event-form button:hover {
+  background: #FFC300;
 }
 
