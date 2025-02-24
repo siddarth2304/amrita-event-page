@@ -33,7 +33,10 @@ const EventTracker = () => {
   };
 
   const handleAddEvent = () => {
-    if (!newEvent.title || !newEvent.date || !newEvent.time || !newEvent.points || !newEvent.details) return;
+    if (!newEvent.title || !newEvent.date || !newEvent.time || !newEvent.points || !newEvent.details) {
+      alert("Please fill in all fields!");
+      return;
+    }
 
     const newEventData = { ...newEvent, id: String(events.length + 1) };
     setEvents([...events, newEventData]);
@@ -50,7 +53,7 @@ const EventTracker = () => {
           <a href="#">Home</a>
           <a href="#">Events</a>
           <a href="#">Profile</a>
-          <button className="add-event-btn" onClick={() => setShowAddEvent(!showAddEvent)}>+ Add Event</button>
+          <button className="add-event-btn" onClick={() => setShowAddEvent(true)}>+ Add Event</button>
         </div>
       </div>
 
@@ -78,7 +81,7 @@ const EventTracker = () => {
         </div>
 
         {/* Event Details Sidebar */}
-        <div className="event-sidebar">
+        <div className={`event-sidebar ${selectedEvent ? "show" : "hidden"}`}>
           {selectedEvent ? (
             <div className="event-details">
               <h2>{selectedEvent.title}</h2>
@@ -92,20 +95,26 @@ const EventTracker = () => {
         </div>
       </div>
 
-      {/* Add Event Form */}
+      {/* Add Event Modal */}
       {showAddEvent && (
-        <div className="add-event-form">
-          <input type="text" placeholder="Event Title" value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
-          <input type="date" value={newEvent.date} onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })} />
-          <input type="time" value={newEvent.time} onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })} />
-          <input type="number" placeholder="Points" value={newEvent.points} onChange={(e) => setNewEvent({ ...newEvent, points: e.target.value })} />
-          <textarea placeholder="Event Details" value={newEvent.details} onChange={(e) => setNewEvent({ ...newEvent, details: e.target.value })} />
-          <select value={newEvent.type} onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value })}>
-            <option value="workshop">Workshop</option>
-            <option value="lecture">Lecture</option>
-            <option value="seminar">Seminar</option>
-          </select>
-          <button onClick={handleAddEvent}>Add</button>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-btn" onClick={() => setShowAddEvent(false)}>✖</button>
+            <h2>Add New Event</h2>
+            <div className="event-form">
+              <input type="text" placeholder="Event Title" value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
+              <input type="date" value={newEvent.date} onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })} />
+              <input type="time" value={newEvent.time} onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })} />
+              <input type="number" placeholder="Points" value={newEvent.points} onChange={(e) => setNewEvent({ ...newEvent, points: e.target.value })} />
+              <textarea placeholder="Event Details" value={newEvent.details} onChange={(e) => setNewEvent({ ...newEvent, details: e.target.value })} />
+              <select value={newEvent.type} onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value })}>
+                <option value="workshop">Workshop</option>
+                <option value="lecture">Lecture</option>
+                <option value="seminar">Seminar</option>
+              </select>
+              <button onClick={handleAddEvent}>Add Event</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
